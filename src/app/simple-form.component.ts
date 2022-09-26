@@ -13,6 +13,7 @@ import { filter, map } from "rxjs/operators";
 export class SimpleFormComponent {
 
   titleDefault =  "";
+  submitTouched = false;
   titleList: Title[];
   testForm: FormGroup;
 
@@ -41,10 +42,11 @@ export class SimpleFormComponent {
   }
 
   onSubmit() {
+    this.submitTouched = true;
     if(this.testForm.valid) console.log(this.testForm.value)
   }
 
   showControlError(control: AbstractControl) {
-    return !control.valid && control.touched;
+    return !control.valid && (control.touched || this.submitTouched);
   }
 }
