@@ -26,7 +26,7 @@ export class SimpleFormComponent {
             return title.name != "!";
           })))
       .subscribe((titles) => {
-        this.titleList = titles;
+        this.titleList = titles.sort((a, b) => a.name.localeCompare(b.name));
         this.createForm();
       });
   }
