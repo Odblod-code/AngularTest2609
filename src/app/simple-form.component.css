@@ -1,0 +1,26 @@
+
+.form {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.form__row,
+.form__conditions {
+    display: flex;
+    gap: 7px;
+}
+
+.form__row > :first-child {
+    min-width: 92px;
+}
+
+.form__row:not(:first-child) > :last-child {
+    width: 100%;
+}
+
+.form__submit {
+    display: flex;
+    justify-content: flex-end;
+}

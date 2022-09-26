@@ -1,28 +1,30 @@
 <h1>Aareon Angular Test</h1>
-<form>
-  <div>
-    <div>
+<form [formGroup]="testForm">
+  <div class="form">
+    <div class="form__row">
       <label>Title</label>
       <select>
         <option value="">-- Select an option --</option>
-        <!-- TODO: add titles to dropdown -->
+        <option *ngFor="let title of titleList" value="title">
+          {{title}}
+        </option>
       </select>
     </div>
-    <div>
+    <div class="form__row">
       <label>First name</label>
       <input type="text" placeholder="First name"/>
     </div>
-    <div>
+    <div class="form__row">
       <label>Last name</label>
       <input type="text" placeholder="Last name"/>
     </div>
     <!-- TODO: add error message -->
     <span></span>
-    <div>
+    <div class="form__conditions">
       <input type="checkbox"/>
       <label>I accept the terms & conditions</label>
     </div>
-    <div>
+    <div class="form__submit">
       <button>Submit</button>
     </div>
   </div>
