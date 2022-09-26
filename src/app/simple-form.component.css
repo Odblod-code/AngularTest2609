@@ -24,3 +24,12 @@
     display: flex;
     justify-content: flex-end;
 }
+
+.form__error {
+    color: red;
+}
+
+.input-error {
+    border-color: red;
+    outline: none;
+}

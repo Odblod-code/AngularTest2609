@@ -1,9 +1,9 @@
 import { Component } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Title } from "./title.model";
 import { TitleService } from "./title.service";
 
-import { filter, map } from 'rxjs/operators';
+import { filter, map } from "rxjs/operators";
 
 @Component({
   selector: "simple-form",
@@ -12,21 +12,39 @@ import { filter, map } from 'rxjs/operators';
 })
 export class SimpleFormComponent {
 
+  titleDefault =  "";
   titleList: Title[];
   testForm: FormGroup;
 
-  constructor(private fb: FormBuilder,
-    private titleService: TitleService) {
-    this.titleService.getTitles().pipe(
-        map((title) => title.filter((title: Title) => title.name != '!'))
-      ).subscribe(titles => {
-      this.titleList = titles;
-    });
-    this.createForm();
+  constructor(private fb: FormBuilder, private titleService: TitleService) {
+    this.titleService
+      .getTitles()
+      .pipe(
+        map((title) => title
+          .filter((title: Title) => {
+            if(title.isDefault) this.titleDefault = title.name;
+            return title.name != "!";
+          })))
+      .subscribe((titles) => {
+        this.titleList = titles;
+        this.createForm();
+      });
   }
-   createForm() {
+
+  createForm() {
     this.testForm = this.fb.group({
-       name: ['', Validators.required ]
+      title: [this.titleDefault],
+      firstName: [""],
+      lastName: ["", Validators.required],
+      acceptTerms: [""],
     });
+  }
+
+  onSubmit() {
+    if(this.testForm.valid) console.log(this.testForm.value)
+  }
+
+  showControlError(control: AbstractControl) {
+    return !control.valid && control.touched;
   }
 }
