@@ -30,7 +30,7 @@
       <label>I accept the terms & conditions</label>
     </div>
     <div class="form__submit">
-      <button>Submit</button>
+      <button [disabled]="!testForm.value.acceptTerms">Submit</button>
     </div>
   </div>
 </form>
