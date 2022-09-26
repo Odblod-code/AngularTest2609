@@ -5,8 +5,9 @@
       <label>Title</label>
       <select>
         <option value="">-- Select an option --</option>
-        <option *ngFor="let title of titleList" value="title">
-          {{title}}
+        <option *ngFor="let title of titleList" 
+          [selected]="title.isDefault" value="title">
+          {{title.name}}
         </option>
       </select>
     </div>
